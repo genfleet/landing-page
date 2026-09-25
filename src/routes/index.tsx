@@ -12,7 +12,6 @@ import { MarketplaceSection } from '@/components/landing/MarketplaceSection';
 import { Navbar } from '@/components/navbar/Navbar';
 import { PricingSection } from '@/components/pricing/PricingSection';
 import type { BillingInterval } from '@/data/pricing';
-import { Separator } from '../shadcn/components/ui/separator';
 
 export const Route = createFileRoute('/')({
   component: LandingPage,
@@ -27,7 +26,7 @@ function LandingPage() {
   const scrollTo = (target: string) => {
     document
       .getElementById(target)
-      ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setMobileMenuOpen(false);
   };
 
@@ -56,7 +55,6 @@ function LandingPage() {
         <CustomizationSection />
         <ControlSection />
         <PricingSection onSelectPlan={selectPlan} />
-        <Separator className='max-w-5xl mx-auto' />
         <BetaSection
           selectedPlan={selectedPlan}
           selectedBilling={selectedBilling}

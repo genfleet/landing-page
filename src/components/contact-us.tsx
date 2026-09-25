@@ -6,13 +6,13 @@ import { Textarea } from '@/shadcn/components/ui/textarea';
 import { type BillingInterval, pricingPlans } from '../data/pricing';
 
 const selectClassName =
-  'h-12 w-full appearance-none rounded-xl border border-input bg-muted px-4 text-sm text-foreground outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50';
+  'h-12 w-full appearance-none rounded-xl border border-input bg-background px-4 text-sm text-foreground outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50';
 
 export function ContactUs({ defaultPlan, defaultBilling }: { defaultPlan: string; defaultBilling: BillingInterval }) {
   const accessKey = import.meta.env.VITE_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
   return (
-    <div className="rounded-2xl border border-brand/20 bg-card p-5 sm:p-8">
+    <div className="rounded-[1.75rem] bg-card p-5 sm:p-8">
       <div className="mb-7">
         <h3 className="text-2xl font-semibold tracking-tight">Request beta access</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -56,7 +56,7 @@ function BetaRequestFields({ defaultPlan, defaultBilling }: { defaultPlan: strin
           autoComplete='email'
           placeholder='you@company.com'
           required
-          className='h-12 rounded-xl bg-muted px-4'
+          className='h-12 rounded-xl bg-background px-4'
         />
       </div>
 
@@ -79,7 +79,7 @@ function BetaRequestFields({ defaultPlan, defaultBilling }: { defaultPlan: strin
           name='use_case'
           placeholder='Describe the work, process, or business goal you would like help with'
           required
-          className='min-h-28 resize-none rounded-xl bg-muted px-4 py-3'
+          className='min-h-28 resize-none rounded-xl bg-background px-4 py-3'
         />
       </div>
     </>

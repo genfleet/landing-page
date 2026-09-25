@@ -20,18 +20,17 @@ const businessFunctions = [
 
 export function BusinessFunctionsSection() {
   return (
-    <section id='agents' className='bg-card px-5 py-24 sm:px-8 sm:py-32'>
+    <section id='agents' className='px-5 py-24 sm:px-8 sm:py-32'>
       <div className='mx-auto max-w-7xl'>
         <div className='grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20'>
           <div>
-            <p className='text-base font-semibold text-brand'>Agents for your business</p>
-            <h2 className='mt-4 max-w-lg text-4xl font-bold leading-tight tracking-tight sm:text-5xl'>Specialized help across your entire business.</h2>
+            <h2 className='max-w-lg text-4xl font-bold leading-[1.02] tracking-[-0.03em] sm:text-[3.4rem]'>Specialized help across your entire business.</h2>
             <p className='mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground'>Find agents for individual tasks or combine specialists into a team that works across functions.</p>
           </div>
           <div className='grid border-t border-border sm:grid-cols-2'>
             {businessFunctions.map(({ label, description, icon: Icon }, index) => (
               <article key={label} className={`grid grid-cols-[auto_1fr] gap-4 border-b border-border py-6 sm:p-6 ${index % 2 === 0 ? 'sm:border-r sm:border-border' : ''}`}>
-                <Icon aria-hidden='true' className='mt-1 size-5 text-brand' />
+                <Icon aria-hidden='true' className='mt-0.5 size-5 text-foreground' />
                 <div>
                   <h3 className='font-semibold'>{label}</h3>
                   <p className='mt-2 text-sm leading-relaxed text-muted-foreground'>{description}</p>

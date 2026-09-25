@@ -2,7 +2,7 @@ import { ArrowRightIcon } from '@phosphor-icons/react/dist/csr/ArrowRight';
 import { ListIcon } from '@phosphor-icons/react/dist/csr/List';
 import { XIcon } from '@phosphor-icons/react/dist/csr/X';
 import { Button } from '@/shadcn/components/ui/button';
-import Logo from '@/components/logo';
+import { Wordmark } from '@/components/logo';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 const navigationItems = [
@@ -25,7 +25,7 @@ export function Navbar({
 }: NavbarProps) {
   return (
     <header className='fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-5'>
-      <div className='mx-auto max-w-7xl rounded-full border bg-background/95 pl-4 py-2.5 pr-2.5 sm:pl-5'>
+      <div className='mx-auto max-w-7xl rounded-full border border-border bg-background/90 backdrop-blur-md pl-4 py-2.5 pr-2.5 sm:pl-5'>
         <div className='flex items-center justify-between gap-3'>
           <button
             type='button'
@@ -33,10 +33,7 @@ export function Navbar({
             className='flex shrink-0 items-center gap-2.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
             aria-label='Go to the top of the page'
           >
-            <Logo width={23} />
-            <span className='text-base font-semibold tracking-tight sm:text-lg font-mono'>
-              genfleet
-            </span>
+            <Wordmark />
           </button>
 
           <nav className='hidden items-center gap-6 lg:flex' aria-label='Primary navigation'>
@@ -45,7 +42,7 @@ export function Navbar({
                 key={item.target}
                 type='button'
                 onClick={() => onNavigate(item.target)}
-                className='rounded-full text-sm text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+                className='rounded-full py-2 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
               >
                 {item.label}
               </button>
@@ -90,7 +87,7 @@ export function Navbar({
                 key={item.target}
                 type='button'
                 onClick={() => onNavigate(item.target)}
-                className='rounded-lg px-3 py-2.5 text-left text-sm text-muted-foreground'
+                className='rounded-lg px-3 py-3 text-left text-base text-muted-foreground hover:bg-muted hover:text-foreground'
               >
                 {item.label}
               </button>

@@ -16,28 +16,28 @@ type HeroProps = {
 
 export function Hero({ onGetAccess, onExploreAgents }: HeroProps) {
   return (
-    <section id='top' className='relative px-5 pb-20 pt-36 sm:px-8 sm:pb-28 sm:pt-44 min-h-screen lg:py-40'>
-      <div className='pointer-events-none absolute inset-0 landing-grid' />
-      <div className='relative mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-20'>
-        <div className='max-w-4xl'>
-          <div className='mb-8 inline-flex items-center gap-2 rounded-full border border-brand/35 bg-background px-3 py-1.5 text-[10px] font-medium uppercase tracking-wide text-brand'>
-            <span className='size-1.5 rounded-full bg-brand' aria-hidden='true' />
+    <section id='top' className='px-5 pb-20 pt-32 sm:px-8 sm:pb-28 sm:pt-40'>
+      <div className='mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20'>
+        <div>
+          <p className='mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground'>
+            <span className='size-2 rounded-full bg-signal' aria-hidden='true' />
             Private beta
-          </div>
-          <h1 className='max-w-5xl text-[clamp(2.9rem,7.2vw,6.7rem)] font-bold leading-[0.94] tracking-[-0.065em]'>
-            Your agents.
-            <span className='block text-brand'>One managed cloud.</span>
+          </p>
+          <h1 className='text-balance text-[clamp(2.75rem,5.8vw,5.5rem)] font-bold leading-[0.98] tracking-[-0.035em]'>
+            Your <span className='text-signal'>AI team</span>,
+            <br />
+            built around your business.
           </h1>
-          <p className='mt-8 max-w-[42rem] text-lg leading-relaxed text-muted-foreground sm:text-xl'>
+          <p className='mt-8 max-w-[36rem] text-lg leading-relaxed text-muted-foreground sm:text-xl'>
             Find specialized agents, connect them to the tools your company uses,
-            and bring them together as a team built around your business.
+            and bring them together as a team that works the way your company does.
           </p>
           <div className='mt-10 flex flex-col gap-3 sm:flex-row sm:items-center'>
             <Button size='lg' type='button' onClick={onGetAccess} className='h-12 rounded-full px-7 text-base'>
               Get early access
               <ArrowRightIcon aria-hidden='true' />
             </Button>
-            <Button size='lg' variant='outline' type='button' onClick={onExploreAgents} className='h-12 rounded-full bg-transparent px-7 text-base'>
+            <Button size='lg' variant='outline' type='button' onClick={onExploreAgents} className='h-12 rounded-full border-foreground/20 bg-transparent px-7 text-base'>
               Explore agents
             </Button>
           </div>
@@ -56,21 +56,21 @@ function AgentWorkspacePreview() {
     { label: 'Assemble a team', detail: 'Set roles and handoffs', icon: UsersThreeIcon },
   ];
   const selectedAgents = [
-    { label: 'Engineering agent', icon: CodeIcon, color: 'text-agent-1' },
-    { label: 'Customer service agent', icon: HeadsetIcon, color: 'text-agent-2' },
-    { label: 'Finance agent', icon: CurrencyDollarIcon, color: 'text-agent-3' },
-    { label: 'Operations agent', icon: GearSixIcon, color: 'text-agent-4' },
+    { label: 'Engineering agent', icon: CodeIcon, color: 'text-foreground' },
+    { label: 'Customer service agent', icon: HeadsetIcon, color: 'text-foreground' },
+    { label: 'Finance agent', icon: CurrencyDollarIcon, color: 'text-foreground' },
+    { label: 'Operations agent', icon: GearSixIcon, color: 'text-foreground' },
   ];
 
   return (
     <figure className='relative mx-auto w-full max-w-xl' aria-label='Building an AI agent team with Genfleet'>
-      <div className='overflow-hidden rounded-2xl border border-brand/20 bg-card'>
+      <div className='overflow-hidden rounded-2xl border border-border bg-card'>
         <div className='flex items-center justify-between border-b border-border px-5 py-4'>
           <div className='flex items-center gap-2 text-sm font-medium'>
             <BriefcaseIcon aria-hidden='true' className='size-4 text-brand' />
             Your Genfleet workspace
           </div>
-          <span className='rounded-full border border-brand/25 px-2.5 py-1 text-[10px] font-medium text-brand'>
+          <span className='rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground'>
             Team setup
           </span>
         </div>
@@ -78,7 +78,7 @@ function AgentWorkspacePreview() {
           <div className='space-y-3'>
             {stages.map(({ label, detail, icon: Icon }, index) => (
               <div key={label} className='grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-border pb-3 last:border-b-0 last:pb-0'>
-                <div className='flex size-9 items-center justify-center rounded-full border border-brand/25 text-brand'>
+                <div className='flex size-9 items-center justify-center rounded-full border border-border text-brand'>
                   <Icon aria-hidden='true' className='size-4' />
                 </div>
                 <div className='min-w-0'>
@@ -97,7 +97,7 @@ function AgentWorkspacePreview() {
               </div>
               <div className='flex -space-x-2' aria-label='Four agents selected'>
                 {selectedAgents.map(({ label, icon: Icon, color }) => (
-                  <span key={label} title={label} className={`flex size-9 items-center justify-center rounded-full border border-brand/35 bg-background ${color}`}>
+                  <span key={label} title={label} className={`flex size-9 items-center justify-center rounded-full border border-border bg-background ${color}`}>
                     <Icon aria-hidden='true' className='size-4' weight='bold' />
                   </span>
                 ))}
