@@ -2,24 +2,24 @@ import { CheckIcon } from '@phosphor-icons/react/dist/csr/Check';
 import { ContactUs } from '@/components/contact-us';
 import type { BillingInterval } from '@/data/pricing';
 
-type BetaSectionProps = {
+type DemoSectionProps = {
   selectedPlan: string;
   selectedBilling: BillingInterval;
 };
 
 const benefits = [
-  'Help choosing the right agents',
-  'Genfleet-assisted customization',
-  'One workspace for your growing team',
+  'A walkthrough built around your use case',
+  'Help choosing your first agents',
+  'A plan for connecting your systems',
 ];
 
-export function BetaSection({ selectedPlan, selectedBilling }: BetaSectionProps) {
+export function DemoSection({ selectedPlan, selectedBilling }: DemoSectionProps) {
   return (
-    <section id='beta' className='relative px-5 py-24 sm:px-8 sm:py-32'>
+    <section className='relative px-5 pb-24 pt-36 sm:px-8 sm:pb-32 sm:pt-44'>
       <div className='relative mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24'>
         <div>
-          <h2 className='text-4xl font-bold leading-[1.02] tracking-[-0.03em] sm:text-6xl'>Start building your AI team.</h2>
-          <p className='mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground'>Tell us where your business needs support. We will help you find, customize, and connect the right agents.</p>
+          <h1 className='text-[clamp(2.6rem,5.4vw,5rem)] font-bold leading-[0.98] tracking-[-0.035em]'>See Genfleet with your own work.</h1>
+          <p className='mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground'>Tell us where your business needs support. In the demo we will show you the agents that fit, how they connect to your systems, and how your team stays in control.</p>
           <ul className='mt-9 space-y-4 text-muted-foreground'>
             {benefits.map((benefit) => (
               <li key={benefit} className='flex items-center gap-3'>

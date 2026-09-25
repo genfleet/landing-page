@@ -14,37 +14,38 @@ export function ContactUs({ defaultPlan, defaultBilling }: { defaultPlan: string
   return (
     <div className="rounded-[1.75rem] bg-card p-5 sm:p-8">
       <div className="mb-7">
-        <h3 className="text-2xl font-semibold tracking-tight">Request beta access</h3>
+        <h2 className="text-2xl font-semibold tracking-tight">Request a demo</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          Tell us where your business needs support and we will follow up about early access.
+          Tell us where your business needs support and we will set up a walkthrough with your team.
         </p>
       </div>
 
       <form action="https://api.web3forms.com/submit" method="POST" className="space-y-5">
         <input type="hidden" name="access_key" value={accessKey} />
-        <input type="hidden" name="subject" value="Genfleet private beta request" />
+        <input type="hidden" name="subject" value="Genfleet demo request" />
         <input type="hidden" name="from_name" value="Genfleet landing page" />
 
-        <BetaRequestFields defaultPlan={defaultPlan} defaultBilling={defaultBilling} />
+        {defaultPlan && <input type="hidden" name="plan" value={defaultPlan} />}
+        <BetaRequestFields defaultBilling={defaultBilling} />
 
         <Button
           type="submit"
           disabled={!accessKey}
           className="h-12 w-full rounded-full text-base"
         >
-          Request access
+          Request a demo
           <ArrowRightIcon aria-hidden="true" />
         </Button>
 
         <p className="text-center text-xs leading-relaxed text-muted-foreground">
-          We will use these details only to follow up about your request.
+          We will only use these details to arrange your demo.
         </p>
       </form>
     </div>
   );
 }
 
-function BetaRequestFields({ defaultPlan, defaultBilling }: { defaultPlan: string; defaultBilling: BillingInterval }) {
+function BetaRequestFields({ defaultBilling }: { defaultBilling: BillingInterval }) {
   return (
     <>
       <div className='space-y-2'>

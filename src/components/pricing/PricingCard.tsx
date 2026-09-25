@@ -13,7 +13,6 @@ type StandardPricingCardProps = {
 
 export function StandardPricingCard({ plan, billing, onSelectPlan }: StandardPricingCardProps) {
   const isRecommended = plan.id === 'pro';
-  const buttonLabel = plan.id === 'starter' ? 'Get started for free' : 'Start for free';
 
   return (
     <article className={`flex min-h-full flex-col rounded-2xl bg-card p-6 sm:p-7 ${isRecommended ? 'ring-2 ring-foreground ring-inset' : ''}`}>
@@ -30,7 +29,7 @@ export function StandardPricingCard({ plan, billing, onSelectPlan }: StandardPri
       </div>
       <PlanFacts plan={plan} />
       <Button type='button' onClick={() => onSelectPlan(plan.id, billing)} className='mt-auto h-11 w-full rounded-full'>
-        {buttonLabel}
+        Choose {plan.name}
         <ArrowRightIcon aria-hidden='true' />
       </Button>
     </article>
@@ -67,7 +66,7 @@ export function EnterprisePricingCard({ billing, onSelectPlan }: { billing: Bill
         <p className='mt-2 text-sm text-muted-foreground'>We will shape a plan around your teams and operating needs.</p>
       </div>
       <Button type='button' variant='outline' onClick={() => onSelectPlan('enterprise', billing)} className='mt-auto h-11 w-full rounded-full border-foreground/25 bg-transparent'>
-        Contact Sales
+        Request a demo
         <ArrowRightIcon aria-hidden='true' />
       </Button>
     </article>

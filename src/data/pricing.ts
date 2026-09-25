@@ -56,16 +56,6 @@ const developerPlans: DeveloperPricingPlan[] = [
 
 const standardPlans: StandardPricingPlan[] = [
   {
-    id: 'free-trial',
-    name: 'Free',
-    monthlyPrice: 0,
-    agents: 1,
-    connectors: '3',
-    startingCredits: 0,
-    family: 'standard',
-    support: 'none',
-  },
-  {
     id: 'starter',
     name: 'Starter',
     monthlyPrice: 25,

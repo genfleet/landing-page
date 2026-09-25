@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router';
 import { ArrowRightIcon } from '@phosphor-icons/react/dist/csr/ArrowRight';
 import { BriefcaseIcon } from '@phosphor-icons/react/dist/csr/Briefcase';
 import { CodeIcon } from '@phosphor-icons/react/dist/csr/Code';
@@ -9,12 +10,7 @@ import { MagnifyingGlassIcon } from '@phosphor-icons/react/dist/csr/MagnifyingGl
 import { UsersThreeIcon } from '@phosphor-icons/react/dist/csr/UsersThree';
 import { Button } from '@/shadcn/components/ui/button';
 
-type HeroProps = {
-  onGetAccess: () => void;
-  onExploreAgents: () => void;
-};
-
-export function Hero({ onGetAccess, onExploreAgents }: HeroProps) {
+export function Hero() {
   return (
     <section id='top' className='px-5 pb-20 pt-32 sm:px-8 sm:pb-28 sm:pt-40'>
       <div className='mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20'>
@@ -33,12 +29,14 @@ export function Hero({ onGetAccess, onExploreAgents }: HeroProps) {
             and bring them together as a team that works the way your company does.
           </p>
           <div className='mt-10 flex flex-col gap-3 sm:flex-row sm:items-center'>
-            <Button size='lg' type='button' onClick={onGetAccess} className='h-12 rounded-full px-7 text-base'>
-              Get early access
-              <ArrowRightIcon aria-hidden='true' />
+            <Button asChild size='lg' className='h-12 rounded-full px-7 text-base'>
+              <Link to='/demo'>
+                Request a demo
+                <ArrowRightIcon aria-hidden='true' />
+              </Link>
             </Button>
-            <Button size='lg' variant='outline' type='button' onClick={onExploreAgents} className='h-12 rounded-full border-foreground/20 bg-transparent px-7 text-base'>
-              Explore agents
+            <Button asChild size='lg' variant='outline' className='h-12 rounded-full border-foreground/20 bg-transparent px-7 text-base'>
+              <Link to='/marketplace'>Explore the marketplace</Link>
             </Button>
           </div>
         </div>
