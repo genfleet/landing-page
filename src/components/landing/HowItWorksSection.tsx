@@ -1,32 +1,29 @@
-import { MagnifyingGlassIcon } from '@phosphor-icons/react/dist/csr/MagnifyingGlass';
-import { PlugsConnectedIcon } from '@phosphor-icons/react/dist/csr/PlugsConnected';
-import { UsersThreeIcon } from '@phosphor-icons/react/dist/csr/UsersThree';
-import { WrenchIcon } from '@phosphor-icons/react/dist/csr/Wrench';
 
 const adoptionSteps = [
-  { title: 'Find the right agents', description: 'Browse by business function, task, or goal to find specialists suited to the work.', icon: MagnifyingGlassIcon },
-  { title: 'Connect your business', description: 'Choose the tools and information each agent needs to work with your team.', icon: PlugsConnectedIcon },
-  { title: 'Make them yours', description: 'Genfleet helps tailor responsibilities, knowledge, access, and approval rules.', icon: WrenchIcon },
-  { title: 'Assemble your team', description: 'Bring specialists together in one workspace and start putting them to work.', icon: UsersThreeIcon },
+  { title: 'Find the right agents', description: 'Browse by business function, task, or goal to find specialists suited to the work.' },
+  { title: 'Connect your business', description: 'Choose the tools and information each agent needs to work with your team.' },
+  { title: 'Make them yours', description: 'Genfleet helps tailor responsibilities, knowledge, access, and approval rules.' },
+  { title: 'Assemble your team', description: 'Bring specialists together in one workspace and start putting them to work.' },
 ];
 
 export function HowItWorksSection() {
   return (
-    <section id='how-it-works' className='px-5 py-24 sm:px-8 sm:py-32'>
+    <section id='how-it-works' className='bg-muted px-5 py-24 sm:px-8 sm:py-32'>
       <div className='mx-auto max-w-7xl'>
         <div className='max-w-3xl'>
-          <p className='text-base font-semibold text-brand'>How it works</p>
-          <h2 className='mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl'>From a business need to a working agent team.</h2>
+          <h2 className='text-4xl font-bold leading-[1.02] tracking-[-0.03em] sm:text-[3.4rem]'>From a business need to a working agent team.</h2>
         </div>
-        <div className='mt-16 border-t border-border'>
-          {adoptionSteps.map(({ title, description, icon: Icon }) => (
-            <article key={title} className='grid gap-4 border-b border-border py-8 sm:grid-cols-[auto_0.8fr_1.2fr] sm:items-start sm:gap-7 sm:py-10'>
-              <Icon aria-hidden='true' className='size-5 text-brand' />
-              <h3 className='text-xl font-semibold leading-snug'>{title}</h3>
-              <p className='max-w-xl leading-relaxed text-muted-foreground'>{description}</p>
-            </article>
+        <ol className='mt-16 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4'>
+          {adoptionSteps.map(({ title, description }, index) => (
+            <li key={title} className='flex min-h-64 flex-col rounded-2xl bg-card p-6'>
+              <span className='font-display text-5xl font-bold leading-none tracking-[-0.04em] text-brand' aria-hidden='true'>
+                {index + 1}
+              </span>
+              <h3 className='mt-auto pt-10 text-lg font-semibold leading-snug'>{title}</h3>
+              <p className='mt-2 leading-relaxed text-muted-foreground'>{description}</p>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

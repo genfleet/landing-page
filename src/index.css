@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -32,76 +31,89 @@
   --color-ring: var(--ring);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-human: var(--human);
+  --color-human-fill: var(--human-fill);
   --color-agent-1: var(--agent-1);
   --color-agent-2: var(--agent-2);
   --color-agent-3: var(--agent-3);
-  --color-agent-4: var(--agent-4);
   --color-footer: var(--footer);
   --color-footer-foreground: var(--footer-foreground);
-  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  --font-google-sans: "Google Sans", sans-serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', 'IBM Plex Sans', ui-sans-serif, sans-serif;
 }
 
 :root {
-  --background: oklch(0.99 0.002 180);
-  --foreground: oklch(0.16 0.006 240);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.16 0.006 240);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.16 0.006 240);
-  --primary: oklch(0.18 0.006 240);
-  --primary-foreground: oklch(0.985 0.002 180);
-  --secondary: oklch(0.965 0.003 220);
-  --secondary-foreground: oklch(0.22 0.006 240);
-  --muted: oklch(0.965 0.003 220);
-  --muted-foreground: oklch(0.49 0.012 240);
-  --accent: oklch(0.95 0.006 195);
-  --accent-foreground: oklch(0.18 0.006 240);
-  --destructive: oklch(0.55 0.19 25.5);
-  --border: oklch(0.9 0.006 220);
-  --input: oklch(0.86 0.008 220);
-  --ring: oklch(0.49 0.12 155);
-  --brand: oklch(0.49 0.12 155);
-  --brand-foreground: oklch(0.985 0.002 180);
-  --agent-1: oklch(0.53 0.17 255);
-  --agent-2: oklch(0.53 0.17 305);
-  --agent-3: oklch(0.6 0.16 55);
-  --agent-4: oklch(0.55 0.17 15);
-  --footer: oklch(0.145 0.006 240);
-  --footer-foreground: oklch(1 0 0);
-  --radius: 0.625rem;
+  /* GenFleet brand guide: Orange #FF5B1F, Blue #3B71CF, Black #000, Grey (light) #E8E5E0, Paper #F4F2EE (logo fill) */
+  --background: #f4f2ee;
+  --foreground: #000000;
+  --card: #fbfaf8;
+  --card-foreground: #000000;
+  --popover: #fbfaf8;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #f4f2ee;
+  --secondary: #e8e5e0;
+  --secondary-foreground: #000000;
+  --muted: #e8e5e0;
+  --muted-foreground: #5c5852;
+  --accent: #e8e5e0;
+  --accent-foreground: #000000;
+  --destructive: #c0341d;
+  --border: #d6d2cb;
+  --input: #cbc6be;
+  --ring: #3b71cf;
+  /* One orange everywhere: the brand accent. Black on it reads at 6.8:1. */
+  --brand: #ff5b1f;
+  --brand-foreground: #000000;
+  /* Orange as a fill: agents. */
+  --signal: #ff5b1f;
+  --signal-foreground: #000000;
+  /* Blue: people, approvals, human review. Text variant 5.5:1 on paper. */
+  --human: #2f5fb3;
+  --human-fill: #3b71cf;
+  /* Agent identities: orange and black are the brand guide's mark variants; gold is kept clear of the people-blue. */
+  --agent-1: #ff5b1f;
+  --agent-2: #000000;
+  --agent-3: #d99a1e;
+  --footer: #000000;
+  --footer-foreground: #f4f2ee;
+  --radius: 0.75rem;
   color-scheme: light;
 }
 
 .dark {
-  --background: oklch(0.145 0.006 240);
-  --foreground: oklch(0.965 0.003 220);
-  --card: oklch(0.17 0.007 240);
-  --card-foreground: oklch(0.965 0.003 220);
-  --popover: oklch(0.19 0.008 240);
-  --popover-foreground: oklch(0.965 0.003 220);
-  --primary: oklch(0.965 0.003 220);
-  --primary-foreground: oklch(0.18 0.006 240);
-  --secondary: oklch(0.235 0.008 240);
-  --secondary-foreground: oklch(0.94 0.004 220);
-  --muted: oklch(0.205 0.008 240);
-  --muted-foreground: oklch(0.72 0.01 220);
-  --accent: oklch(0.235 0.012 210);
-  --accent-foreground: oklch(0.965 0.003 220);
-  --destructive: oklch(0.55 0.19 25.5);
-  --border: oklch(0.285 0.01 240);
-  --input: oklch(0.31 0.012 240);
-  --ring: oklch(0.74 0.14 155);
-  --brand: oklch(0.74 0.14 155);
-  --brand-foreground: oklch(0.145 0.006 240);
-  --agent-1: oklch(0.72 0.14 255);
-  --agent-2: oklch(0.72 0.14 305);
-  --agent-3: oklch(0.76 0.14 65);
-  --agent-4: oklch(0.7 0.14 15);
-  --footer: oklch(0.145 0.006 240);
-  --footer-foreground: oklch(1 0 0);
-  --radius: 0.625rem;
+  --background: #000000;
+  --foreground: #f4f2ee;
+  --card: #121211;
+  --card-foreground: #f4f2ee;
+  --popover: #121211;
+  --popover-foreground: #f4f2ee;
+  --primary: #f4f2ee;
+  --primary-foreground: #000000;
+  --secondary: #1b1a19;
+  --secondary-foreground: #f4f2ee;
+  --muted: #0d0d0c;
+  --muted-foreground: #a8a39b;
+  --accent: #1b1a19;
+  --accent-foreground: #f4f2ee;
+  --destructive: #ff7a5c;
+  --border: #2a2927;
+  --input: #3a3835;
+  --ring: #7ea3e8;
+  --brand: #ff5b1f;
+  --brand-foreground: #000000;
+  --signal: #ff5b1f;
+  --signal-foreground: #000000;
+  --human: #86a9eb;
+  --human-fill: #3b71cf;
+  --agent-1: #ff5b1f;
+  --agent-2: #f4f2ee;
+  --agent-3: #e8aa2e;
+  --footer: #000000;
+  --footer-foreground: #f4f2ee;
+  --radius: 0.75rem;
   color-scheme: dark;
 }
 
@@ -113,10 +125,6 @@
   html {
     scroll-behavior: smooth;
     overflow-x: clip;
-  }
-
-  section[id] {
-    scroll-margin-top: 6rem;
   }
 
   body {
@@ -133,18 +141,15 @@
     @apply cursor-pointer;
   }
 
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-feature-settings: 'ss01';
+  }
+
   ::selection {
     @apply bg-primary text-primary-foreground;
   }
-}
-
-.landing-grid {
-  background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: linear-gradient(to bottom, black, transparent 90%);
-  opacity: 1;
 }
 
 input:-webkit-autofill,

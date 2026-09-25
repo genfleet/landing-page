@@ -7,7 +7,7 @@ export function PlanPrice({ plan, billing }: { plan: PricingPlan; billing: Billi
   if (billing === 'monthly') {
     return (
       <p className='flex items-end gap-2'>
-        <span className='text-4xl font-semibold tracking-tight text-brand'>${formatPrice(plan.monthlyPrice)}</span>
+        <span className='font-display text-4xl font-bold tracking-[-0.03em]'>${formatPrice(plan.monthlyPrice)}</span>
         <span className='pb-1 text-sm text-muted-foreground'>/ month</span>
       </p>
     );
@@ -19,7 +19,7 @@ export function PlanPrice({ plan, billing }: { plan: PricingPlan; billing: Billi
   return (
     <div>
       <p className='flex flex-wrap items-end gap-x-2 gap-y-1'>
-        <span className='text-4xl font-semibold tracking-tight text-brand'>${formatPrice(monthlyEquivalent)}</span>
+        <span className='font-display text-4xl font-bold tracking-[-0.03em]'>${formatPrice(monthlyEquivalent)}</span>
         <span className='pb-1 text-sm text-muted-foreground'>/ month</span>
       </p>
       <div className='mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground'>

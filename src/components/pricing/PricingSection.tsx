@@ -23,26 +23,25 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps) {
       : <EnterprisePricingCard billing={billing} onSelectPlan={onSelectPlan} />;
 
   return (
-    <section id='pricing' className='px-5 py-24 sm:px-8 sm:py-32'>
+    <section id='pricing' className='bg-muted px-5 py-24 sm:px-8 sm:py-32'>
       <div className='mx-auto max-w-7xl'>
         <div className='mx-auto max-w-5xl text-center'>
-          <p className='text-7xl font-google-sans'>Pricing</p>
-          <h2 className='mt-2 text-lg text-brand font-medium leading-tight tracking-tight sm:text-2xl'>
+          <h2 className='text-4xl font-bold leading-[1.02] tracking-[-0.03em] sm:text-[3.4rem]'>
             Start with one agent. Grow into a team.
           </h2>
-          <p className='mx-auto mt-3 italic leading-relaxed text-muted-foreground'>
-            All plans follow the bring your own key model, if you want us to
-            manage your keys for you, extra charges will apply.
+          <p className='mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground'>
+            Every plan uses your own model API keys. If you would rather we
+            manage keys for you, that is available at an extra charge.
           </p>
         </div>
-        <div className='mt-10 flex flex-col gap-4  sm:items-center sm:justify-between'>
+        <div className='mt-10 flex flex-col items-center gap-4'>
           <PlanSwitch
             selectedFamily={selectedFamily}
             onFamilyChange={setSelectedFamily}
           />
           <PricingSwitch billing={billing} onBillingChange={setBilling} />
         </div>
-        <div className={`mt-8 space-y-4 md:space-y-0 md:flex lg:grid lg:grid-cols-4 items-stretch gap-2.5`}>
+        <div className={`mt-8 space-y-4 md:grid md:space-y-0 md:grid-cols-2 lg:grid-cols-4 items-stretch gap-2.5`}>
           {pricingCards}
         </div>
       </div>
