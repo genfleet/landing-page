@@ -15,8 +15,8 @@ const benefits = [
 
 export function DemoSection({ selectedPlan, selectedBilling }: DemoSectionProps) {
   return (
-    <section className='relative px-5 pb-24 pt-36 sm:px-8 sm:pb-32 sm:pt-44'>
-      <div className='relative mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24'>
+    <section className='px-5 pb-24 pt-36 sm:px-8 sm:pb-32 sm:pt-44'>
+      <div className='mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24'>
         <div>
           <h1 className='text-[clamp(2.6rem,5.4vw,5rem)] font-bold leading-[0.98] tracking-[-0.035em]'>See Genfleet with your own work.</h1>
           <p className='mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground'>Tell us where your business needs support. In the demo we will show you the agents that fit, how they connect to your systems, and how your team stays in control.</p>

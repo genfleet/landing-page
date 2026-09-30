@@ -2,7 +2,7 @@ const faqs = [
   {
     question: 'Which AI models can our agents use?',
     answer:
-      'Agents work with the major model providers. Every plan uses your own model API keys, or we can manage keys for you at an extra charge. Each agent can be pinned to a specific model today, and smart routing is on the way.',
+      'Agents work with the major model providers. Every plan uses your own model API keys, or we can manage keys for you at an extra charge.',
   },
   {
     question: 'Can we bring agents we have already built?',
@@ -12,12 +12,12 @@ const faqs = [
   {
     question: 'Where do our agents run, and who can see our data?',
     answer:
-      'Every agent runs in its own isolated container, and each company works in a separate workspace. Connected accounts and API keys are stored as secrets scoped to your workspace, never shared with other companies.',
+      'Every agent runs in its own isolated sandbox, and each company works in a separate workspace. Connected accounts and API keys are stored as secrets scoped to your workspace, never shared with other companies.',
   },
   {
     question: 'What happens when an agent gets something wrong?',
     answer:
-      'Every agent run is logged, so your team can see what an agent did and which tools it used. Approval steps for sensitive actions are coming soon.',
+      'Every agent run is logged, so your team can see what an agent did and which tools it used.',
   },
   {
     question: 'How does billing work?',
@@ -39,7 +39,7 @@ export function FaqSection() {
         <div className='border-t border-border'>
           {faqs.map(({ question, answer }) => (
             <details key={question} className='group border-b border-border'>
-              <summary className='flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden'>
+              <summary className='flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-semibold [&::-webkit-details-marker]:hidden'>
                 {question}
                 <span aria-hidden='true' className='relative size-4 shrink-0'>
                   <span className='absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 bg-current' />

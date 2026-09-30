@@ -1,4 +1,4 @@
-import { ArrowRightIcon } from '@phosphor-icons/react/dist/csr/ArrowRight';
+import { NudgeArrow } from '@/components/nudge-arrow';
 import { Button } from '@/shadcn/components/ui/button';
 import { Input } from '@/shadcn/components/ui/input';
 import { Label } from '@/shadcn/components/ui/label';
@@ -34,7 +34,7 @@ export function ContactUs({ defaultPlan, defaultBilling }: { defaultPlan: string
           className="h-12 w-full rounded-full text-base"
         >
           Request a demo
-          <ArrowRightIcon aria-hidden="true" />
+          <NudgeArrow />
         </Button>
 
         <p className="text-center text-xs leading-relaxed text-muted-foreground">
@@ -73,7 +73,7 @@ function BetaRequestFields({ defaultBilling }: { defaultBilling: BillingInterval
 
       <div className='space-y-2'>
         <Label htmlFor='useCase'>
-          What would you like your agent team to handle?
+          What would you like your AI team to handle?
         </Label>
         <Textarea
           id='useCase'

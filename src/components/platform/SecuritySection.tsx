@@ -1,54 +1,72 @@
+import { EyeIcon } from '@phosphor-icons/react/dist/csr/Eye';
+import { KeyIcon } from '@phosphor-icons/react/dist/csr/Key';
+import { LockSimpleIcon } from '@phosphor-icons/react/dist/csr/LockSimple';
+import { ShieldCheckIcon } from '@phosphor-icons/react/dist/csr/ShieldCheck';
+import { StackIcon } from '@phosphor-icons/react/dist/csr/Stack';
 import { LogoMark } from '@/components/logo';
-import { StatusTag } from '@/components/status-tag';
-import { CapabilityList, SectionIntro, type Capability } from './SectionIntro';
+import { FeatureGrid, PlatformSection } from './shared';
 
-const capabilities: Capability[] = [
-  { title: 'Every agent in its own container', detail: 'Agent code never runs on shared machinery. Each one gets a locked-down container with its own limits.', status: 'available' },
-  { title: 'A separate workspace for every company', detail: 'Your agents, data, and settings are scoped to your workspace and invisible to anyone else.', status: 'available' },
-  { title: 'Keys and accounts stored as secrets', detail: 'API keys and connected accounts live in a secrets store, not in agent code, and every read is logged.', status: 'available' },
-  { title: 'Outbound network control', detail: 'See every outside address an agent reaches today. Blocking anything you have not approved comes next.', status: 'rolling-out' },
+const features = [
+  { icon: StackIcon, title: 'A sandbox for every agent', detail: 'Agent code never shares machinery. Each agent runs locked down, with its own limits.' },
+  { icon: ShieldCheckIcon, title: 'A workspace for every company', detail: 'Agents, data, and settings are scoped to your company and invisible to anyone else.' },
+  { icon: KeyIcon, title: 'Secrets kept out of agent code', detail: 'API keys and connected accounts live in a secrets store, and every read is logged.' },
+  { icon: EyeIcon, title: 'Outbound traffic in view', detail: 'See every outside address an agent reaches, so nothing talks to the internet unnoticed.' },
 ];
 
-const yourAgents = [
-  { name: 'Support agent', color: 'text-agent-1' },
-  { name: 'Finance agent', color: 'text-agent-2' },
-  { name: 'Sales agent', color: 'text-agent-3' },
+const sandboxes = [
+  { name: 'Support', color: 'text-agent-1' },
+  { name: 'Finance', color: 'text-agent-2' },
+  { name: 'Sales', color: 'text-agent-3' },
 ];
+
+function IsolationDiagram() {
+  return (
+    <figure aria-label='Inside Genfleet, your workspace holds each agent in its own sandbox next to a secrets store. Another company’s workspace is fully separate.' className='rounded-[1.75rem] border border-dashed border-foreground/25 p-3 sm:p-4'>
+      <figcaption className='px-1 pb-3 text-xs font-semibold text-muted-foreground'>Genfleet cloud</figcaption>
+      <div className='grid gap-3 md:grid-cols-[1fr_0.42fr]'>
+        <div className='rounded-2xl bg-card p-3 ring-1 ring-foreground/80 sm:p-4'>
+          <p className='px-1 pb-3 text-sm font-semibold'>Your workspace</p>
+          <ul className='grid grid-cols-3 gap-2'>
+            {sandboxes.map(({ name, color }) => (
+              <li key={name} className='rounded-xl border border-border p-3'>
+                <div className='flex items-start justify-between'>
+                  <LogoMark className={`w-7 ${color}`} />
+                  <LockSimpleIcon aria-hidden='true' className='size-3.5 text-muted-foreground' />
+                </div>
+                <p className='mt-5 text-sm font-semibold'>{name}</p>
+                <p className='text-xs text-muted-foreground'>Own sandbox</p>
+              </li>
+            ))}
+          </ul>
+          <div className='mt-2 flex items-center gap-2.5 rounded-xl bg-muted px-3 py-2.5 text-sm'>
+            <KeyIcon aria-hidden='true' className='size-4 text-signal' />
+            <span className='font-medium'>Secrets store</span>
+            <span className='ml-auto text-xs text-muted-foreground'>Reads logged</span>
+          </div>
+        </div>
+        <div className='flex flex-col rounded-2xl border border-border p-3 text-muted-foreground sm:p-4'>
+          <p className='px-1 text-sm font-semibold'>Another company</p>
+          <div className='mt-3 grid flex-1 place-items-center rounded-xl border border-dashed border-border p-4 text-center text-xs'>
+            Separate agents, data, and secrets
+          </div>
+        </div>
+      </div>
+    </figure>
+  );
+}
 
 export function SecuritySection() {
   return (
-    <section id='security' className='px-5 py-24 sm:px-8 sm:py-32'>
-      <div className='mx-auto grid max-w-7xl gap-16 lg:grid-cols-2 lg:gap-24'>
-        <div>
-          <SectionIntro title='Isolated by default.'>
-            Agents run code on your behalf, so every one of them is boxed in: its own container, inside a workspace that belongs only to your company.
-          </SectionIntro>
-          <CapabilityList items={capabilities} renderStatus={(status) => <StatusTag status={status} />} />
-        </div>
-
-        <figure className='self-center' aria-label='Your workspace holds three agents, each in its own container, separated from another company’s workspace'>
-          <div className='rounded-[1.75rem] border-2 border-foreground p-3 sm:p-4'>
-            <p className='px-2 pb-3 pt-1 text-sm font-semibold'>Your workspace</p>
-            <ul className='grid gap-2.5 sm:grid-cols-3'>
-              {yourAgents.map(({ name, color }) => (
-                <li key={name} className='rounded-2xl border border-dashed border-foreground/35 bg-card p-4'>
-                  <LogoMark className={`w-7 ${color}`} />
-                  <p className='mt-6 text-sm font-semibold'>{name}</p>
-                  <p className='mt-0.5 text-xs text-muted-foreground'>Own container</p>
-                </li>
-              ))}
-            </ul>
-            <div className='mt-2.5 flex items-center justify-between gap-4 rounded-2xl bg-muted px-4 py-3 text-sm'>
-              <span className='font-medium'>Secrets store</span>
-              <span className='text-muted-foreground'>Keys and connected accounts</span>
-            </div>
-          </div>
-          <div className='mt-3 rounded-[1.75rem] border border-border p-4 text-muted-foreground'>
-            <p className='text-sm font-semibold'>Another company’s workspace</p>
-            <p className='mt-1 text-sm'>Separate agents, data, and secrets. No shared access in either direction.</p>
-          </div>
-        </figure>
+    <PlatformSection
+      id='security'
+      tone='base'
+      title='Isolated by default.'
+      lead='Agents run code on your behalf, so each one is boxed in: its own sandbox, inside a workspace that belongs only to your company.'
+    >
+      <div className='grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16'>
+        <IsolationDiagram />
+        <FeatureGrid items={features} className='sm:grid-cols-1' />
       </div>
-    </section>
+    </PlatformSection>
   );
 }

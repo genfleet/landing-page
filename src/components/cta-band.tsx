@@ -1,6 +1,10 @@
 import { Link } from '@tanstack/react-router';
-import { ArrowRightIcon } from '@phosphor-icons/react/dist/csr/ArrowRight';
+import { NudgeArrow } from '@/components/nudge-arrow';
+import { pricingPlans } from '@/data/pricing';
 import { Button } from '@/shadcn/components/ui/button';
+
+// The lowest Standard plan, so the pricing hint never drifts from the pricing page.
+const startingPrice = Math.min(...pricingPlans.standard.map((plan) => plan.monthlyPrice));
 
 type CtaBandProps = {
   title?: string;
@@ -18,12 +22,22 @@ export function CtaBand({
           <h2 className='text-4xl font-bold leading-[1.02] tracking-[-0.03em] sm:text-[3.4rem]'>{title}</h2>
           <p className='mt-5 text-lg leading-relaxed text-muted-foreground'>{lead}</p>
         </div>
-        <Button asChild size='lg' className='h-12 shrink-0 self-start rounded-full px-7 text-base lg:self-auto'>
-          <Link to='/demo'>
-            Request a demo
-            <ArrowRightIcon aria-hidden='true' />
-          </Link>
-        </Button>
+        <div className='flex shrink-0 flex-col gap-3 lg:items-end'>
+          <div className='flex flex-col gap-3 sm:flex-row'>
+            <Button asChild size='lg' className='h-12 rounded-full px-7 text-base hover:bg-signal hover:text-white active:bg-signal active:text-white'>
+              <Link to='/demo'>
+                Request a demo
+                <NudgeArrow />
+              </Link>
+            </Button>
+            <Button asChild size='lg' variant='outline' className='h-12 rounded-full border-foreground/20 bg-transparent px-7 text-base hover:border-signal hover:bg-signal hover:text-white'>
+              <Link to='/pricing'>See pricing</Link>
+            </Button>
+          </div>
+          <p className='text-sm text-muted-foreground'>
+            Plans from ${startingPrice} a month. Enterprise plans are quoted for your organization.
+          </p>
+        </div>
       </div>
     </section>
   );

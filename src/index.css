@@ -38,6 +38,7 @@
   --color-agent-1: var(--agent-1);
   --color-agent-2: var(--agent-2);
   --color-agent-3: var(--agent-3);
+  --color-band: var(--band);
   --color-footer: var(--footer);
   --color-footer-foreground: var(--footer-foreground);
   --font-sans: 'IBM Plex Sans', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -45,73 +46,83 @@
 }
 
 :root {
-  /* GenFleet brand guide: Orange #FF5B1F, Blue #3B71CF, Black #000, Grey (light) #E8E5E0, Paper #F4F2EE (logo fill) */
+  /* GenFleet brand guide: Orange #FF5B1F, Blue #3B71CF, Grey (light) #E8E5E0, Paper #F4F2EE (logo fill).
+     The guide's black is softened to a warm ink: pure #000 is harsh against paper. */
   --background: #f4f2ee;
-  --foreground: #000000;
+  --foreground: #1c1b19;
   --card: #fbfaf8;
-  --card-foreground: #000000;
+  --card-foreground: #1c1b19;
   --popover: #fbfaf8;
-  --popover-foreground: #000000;
-  --primary: #000000;
+  --popover-foreground: #1c1b19;
+  --primary: #1c1b19;
   --primary-foreground: #f4f2ee;
   --secondary: #e8e5e0;
-  --secondary-foreground: #000000;
+  --secondary-foreground: #1c1b19;
   --muted: #e8e5e0;
   --muted-foreground: #5c5852;
   --accent: #e8e5e0;
-  --accent-foreground: #000000;
+  --accent-foreground: #1c1b19;
   --destructive: #c0341d;
   --border: #d6d2cb;
   --input: #cbc6be;
-  --ring: #3b71cf;
-  /* One orange everywhere: the brand accent. Black on it reads at 6.8:1. */
+  --ring: #1c1b19;
+  /* One orange everywhere: the brand accent. */
   --brand: #ff5b1f;
-  --brand-foreground: #000000;
+  --brand-foreground: #1c1b19;
   /* Orange as a fill: agents. */
   --signal: #ff5b1f;
-  --signal-foreground: #000000;
+  --signal-foreground: #1c1b19;
   /* Blue: people, approvals, human review. Text variant 5.5:1 on paper. */
   --human: #2f5fb3;
   --human-fill: #3b71cf;
   /* Agent identities: orange and black are the brand guide's mark variants; gold is kept clear of the people-blue. */
   --agent-1: #ff5b1f;
-  --agent-2: #000000;
+  --agent-2: #1c1b19;
   --agent-3: #d99a1e;
-  --footer: #000000;
+  /* The one dark band on light pages; also lifted slightly in dark mode. */
+  --band: #2a2825;
+  --footer: #22211f;
   --footer-foreground: #f4f2ee;
   --radius: 0.75rem;
+  /* Decelerating curve for things that glide into place. */
+  --ease-glide: cubic-bezier(0.32, 0.72, 0, 1);
+  /* Motion scale: quick for hover and press, standard for state changes, glide for things that travel. */
+  --dur-quick: 150ms;
+  --dur-standard: 250ms;
+  --dur-glide: 500ms;
   color-scheme: light;
 }
 
 .dark {
-  --background: #000000;
+  --background: #141413;
   --foreground: #f4f2ee;
-  --card: #121211;
+  --card: #211f1d;
   --card-foreground: #f4f2ee;
-  --popover: #121211;
+  --popover: #211f1d;
   --popover-foreground: #f4f2ee;
   --primary: #f4f2ee;
-  --primary-foreground: #000000;
-  --secondary: #1b1a19;
+  --primary-foreground: #1c1b19;
+  --secondary: #262422;
   --secondary-foreground: #f4f2ee;
-  --muted: #0d0d0c;
+  --muted: #1c1b19;
   --muted-foreground: #a8a39b;
-  --accent: #1b1a19;
+  --accent: #262422;
   --accent-foreground: #f4f2ee;
   --destructive: #ff7a5c;
-  --border: #2a2927;
-  --input: #3a3835;
-  --ring: #7ea3e8;
+  --border: #302e2b;
+  --input: #3d3a36;
+  --ring: #f4f2ee;
   --brand: #ff5b1f;
-  --brand-foreground: #000000;
+  --brand-foreground: #1c1b19;
   --signal: #ff5b1f;
-  --signal-foreground: #000000;
+  --signal-foreground: #1c1b19;
   --human: #86a9eb;
   --human-fill: #3b71cf;
   --agent-1: #ff5b1f;
   --agent-2: #f4f2ee;
   --agent-3: #e8aa2e;
-  --footer: #000000;
+  --band: #2a2825;
+  --footer: #0f0f0e;
   --footer-foreground: #f4f2ee;
   --radius: 0.75rem;
   color-scheme: dark;
@@ -119,7 +130,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
 
   html {
@@ -147,6 +158,19 @@
     font-feature-settings: 'ss01';
   }
 
+  /* One focus style for everything you can tab to: an ink outline that sits just
+     outside the element and follows its corners. Form fields keep their own. */
+  :where(a, button, summary, [role='tab'], [tabindex]) {
+    /* Set ahead of focus so color transitions on the element never tint the outline. */
+    outline-color: var(--ring);
+  }
+
+  :where(a, button, summary, [role='tab'], [tabindex]):focus-visible {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: 3px;
+  }
+
   ::selection {
     @apply bg-primary text-primary-foreground;
   }
@@ -162,7 +186,101 @@ select:-webkit-autofill {
   transition: background-color 9999s ease-out;
 }
 
+/* Agent team graph, drawn like a React Flow canvas: a dot grid, and dashed
+   edges that flow from source to target. Reduced motion stops the flow. */
+.flow-canvas {
+  background-image: radial-gradient(color-mix(in oklab, var(--foreground) 16%, transparent) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.flow-edge {
+  stroke: color-mix(in oklab, var(--foreground) 38%, transparent);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+  vector-effect: non-scaling-stroke;
+  animation: flow-dash 1.2s linear infinite;
+}
+
+@keyframes flow-dash {
+  to { stroke-dashoffset: -10; }
+}
+
+/* Agent builder: rows enter one after another; leaving is quicker than arriving. */
+.layer-rows > * {
+  opacity: 0;
+  translate: 0 6px;
+  transition: opacity 160ms ease-in, translate 160ms ease-in;
+}
+
+.layer-rows[data-active='true'] > * {
+  opacity: 1;
+  translate: 0 0;
+  transition: opacity 360ms var(--ease-glide), translate 460ms var(--ease-glide);
+}
+
+.layer-rows[data-active='true'] > :nth-child(1) { transition-delay: 90ms; }
+.layer-rows[data-active='true'] > :nth-child(2) { transition-delay: 130ms; }
+.layer-rows[data-active='true'] > :nth-child(3) { transition-delay: 170ms; }
+.layer-rows[data-active='true'] > :nth-child(4) { transition-delay: 210ms; }
+
+/* A short nudge for icons on hover: tilt, overshoot, settle. */
+@keyframes icon-nudge {
+  0% { transform: rotate(0) scale(1); }
+  40% { transform: rotate(-8deg) scale(1.12); }
+  100% { transform: rotate(0) scale(1.08); }
+}
+
+/* Page changes: the old page steps back quickly, the new one settles in. The
+   header has its own transition name so it stays put while content changes. */
+header[data-site-header] {
+  view-transition-name: site-header;
+}
+
+::view-transition-old(root) {
+  animation: page-out var(--dur-quick) ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: page-in 380ms var(--ease-glide) both;
+}
+
+@keyframes page-out {
+  to { opacity: 0; }
+}
+
+@keyframes page-in {
+  from { opacity: 0; translate: 0 10px; }
+}
+
+/* FAQ answers open and close instead of popping, where the browser supports it. */
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+
+  details::details-content {
+    block-size: 0;
+    overflow: clip;
+    opacity: 0;
+    transition: block-size var(--dur-standard) var(--ease-glide), opacity var(--dur-standard) ease, content-visibility var(--dur-standard) allow-discrete;
+  }
+
+  details[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  /* Swap movement for plain fades, and drop the scale-on-press. */
+  ::view-transition-new(root) {
+    animation-name: page-fade-in;
+  }
+
+  @keyframes page-fade-in {
+    from { opacity: 0; }
+  }
+
   *,
   *::before,
   *::after {

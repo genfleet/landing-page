@@ -1,4 +1,4 @@
-import { ArrowRightIcon } from '@phosphor-icons/react/dist/csr/ArrowRight';
+import { NudgeArrow } from '@/components/nudge-arrow';
 import { Button } from '@/shadcn/components/ui/button';
 import { type BillingInterval, type PricingPlan } from '@/data/pricing';
 import { PlanFacts, PlanPrice } from './PricingDetails';
@@ -23,14 +23,14 @@ export function StandardPricingCard({ plan, billing, onSelectPlan }: StandardPri
         </div>
         {isRecommended && <span className='rounded-full bg-signal px-2.5 py-1 text-xs font-medium text-signal-foreground'>Recommended</span>}
       </div>
-      <p className='mt-3 min-h-12 text-sm leading-relaxed text-muted-foreground'>Choose the right capacity for a growing team of agents.</p>
+      <p className='mt-3 min-h-12 text-sm leading-relaxed text-muted-foreground'>Choose the right capacity for a growing AI team.</p>
       <div className='mt-7'>
         <PlanPrice plan={plan} billing={billing} />
       </div>
       <PlanFacts plan={plan} />
       <Button type='button' onClick={() => onSelectPlan(plan.id, billing)} className='mt-auto h-11 w-full rounded-full'>
         Choose {plan.name}
-        <ArrowRightIcon aria-hidden='true' />
+        <NudgeArrow />
       </Button>
     </article>
   );
@@ -47,7 +47,7 @@ export function DeveloperPricingCard({ plan, billing, onSelectPlan }: { plan: Pr
       <p className='mt-3 min-h-12 text-sm leading-relaxed text-muted-foreground'>For developers who want to create, publish, and sell agents through the Genfleet marketplace.</p>
       <Button type='button' variant='outline' onClick={() => onSelectPlan(plan.id, billing)} className='mt-auto h-11 w-full rounded-full border-foreground/25 bg-transparent'>
         Get developer access
-        <ArrowRightIcon aria-hidden='true' />
+        <NudgeArrow />
       </Button>
     </article>
   );
@@ -67,7 +67,7 @@ export function EnterprisePricingCard({ billing, onSelectPlan }: { billing: Bill
       </div>
       <Button type='button' variant='outline' onClick={() => onSelectPlan('enterprise', billing)} className='mt-auto h-11 w-full rounded-full border-foreground/25 bg-transparent'>
         Request a demo
-        <ArrowRightIcon aria-hidden='true' />
+        <NudgeArrow />
       </Button>
     </article>
   );

@@ -11,8 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PlatformRouteImport } from './routes/platform'
-import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as DemoRouteImport } from './routes/demo'
+import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PricingRoute = PricingRouteImport.update({
@@ -25,14 +25,14 @@ const PlatformRoute = PlatformRouteImport.update({
   path: '/platform',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MarketplaceRoute = MarketplaceRouteImport.update({
-  id: '/marketplace',
-  path: '/marketplace',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DemoRoute = DemoRouteImport.update({
   id: '/demo',
   path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsRoute = AgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -43,38 +43,38 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
   '/demo': typeof DemoRoute
-  '/marketplace': typeof MarketplaceRoute
   '/platform': typeof PlatformRoute
   '/pricing': typeof PricingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
   '/demo': typeof DemoRoute
-  '/marketplace': typeof MarketplaceRoute
   '/platform': typeof PlatformRoute
   '/pricing': typeof PricingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
   '/demo': typeof DemoRoute
-  '/marketplace': typeof MarketplaceRoute
   '/platform': typeof PlatformRoute
   '/pricing': typeof PricingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo' | '/marketplace' | '/platform' | '/pricing'
+  fullPaths: '/' | '/agents' | '/demo' | '/platform' | '/pricing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo' | '/marketplace' | '/platform' | '/pricing'
-  id: '__root__' | '/' | '/demo' | '/marketplace' | '/platform' | '/pricing'
+  to: '/' | '/agents' | '/demo' | '/platform' | '/pricing'
+  id: '__root__' | '/' | '/agents' | '/demo' | '/platform' | '/pricing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgentsRoute: typeof AgentsRoute
   DemoRoute: typeof DemoRoute
-  MarketplaceRoute: typeof MarketplaceRoute
   PlatformRoute: typeof PlatformRoute
   PricingRoute: typeof PricingRoute
 }
@@ -95,18 +95,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/marketplace': {
-      id: '/marketplace'
-      path: '/marketplace'
-      fullPath: '/marketplace'
-      preLoaderRoute: typeof MarketplaceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/demo': {
       id: '/demo'
       path: '/demo'
       fullPath: '/demo'
       preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents': {
+      id: '/agents'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof AgentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -121,8 +121,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgentsRoute: AgentsRoute,
   DemoRoute: DemoRoute,
-  MarketplaceRoute: MarketplaceRoute,
   PlatformRoute: PlatformRoute,
   PricingRoute: PricingRoute,
 }

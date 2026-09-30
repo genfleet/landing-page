@@ -58,7 +58,7 @@ function ApiKeyFact({ startingCredits }: { startingCredits: number }) {
     <div className='flex items-center justify-between gap-4 py-4'>
       <dt className='group relative flex items-center gap-1.5 text-sm text-muted-foreground'>
         API Keys
-        <button type='button' aria-label='API key requirement' aria-describedby={tooltipId} className='flex size-5 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'>
+        <button type='button' aria-label='API key requirement' aria-describedby={tooltipId} className='flex size-5 items-center justify-center rounded-full'>
           <InfoIcon aria-hidden='true' className='size-3.5' />
         </button>
         <span id={tooltipId} role='tooltip' className='invisible absolute bottom-full left-0 z-50 mb-2 w-64 rounded-lg bg-primary px-3 py-2 text-left text-xs leading-relaxed text-primary-foreground group-focus-within:visible group-hover:visible'>
