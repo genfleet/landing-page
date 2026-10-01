@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Static site on Cloudflare Workers: serve the Vite build, and answer unknown
+  // paths with index.html so client-side routes (/platform, /agents, ...) load.
+  "name": "landing-page-dev",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}

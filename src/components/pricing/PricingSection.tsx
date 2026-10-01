@@ -7,8 +7,11 @@ import { PricingSwitch } from './PricingSwitch';
 
 export function PricingSection() {
   const navigate = useNavigate();
+  // Developer plans open the developer waitlist; business plans go to a demo request.
   const onSelectPlan = (plan: string, billing: BillingInterval) =>
-    navigate({ to: '/demo', search: { plan, billing } });
+    plan.startsWith('developer')
+      ? navigate({ to: '/waitlist', search: { plan, billing } })
+      : navigate({ to: '/demo', search: { plan, billing } });
   const [billing, setBilling] = useState<BillingInterval>('annual');
   const [selectedFamily, setSelectedFamily] = useState<PlanFamily>('standard');
 
@@ -32,7 +35,8 @@ export function PricingSection() {
           />
           <PricingSwitch billing={billing} onBillingChange={setBilling} />
         </div>
-        <div className={`mt-8 space-y-4 md:grid md:space-y-0 md:grid-cols-2 lg:grid-cols-3 items-stretch gap-2.5`}>
+        {/* Cards keep one width and center in the row, so one, two, or three plans all sit balanced. */}
+        <div className='mt-8 flex flex-wrap items-stretch justify-center gap-2.5 [&>*]:w-full md:[&>*]:w-[calc((100%-0.625rem)/2)] lg:[&>*]:w-[calc((100%-1.25rem)/3)]'>
           {pricingCards}
         </div>
       </div>
