@@ -21,50 +21,65 @@ export interface StandardPricingPlan extends PricingPlan {
   startingCredits: number;
   connectors: Connectors;
 }
+export type PlanFeature = {
+  text: string;
+  // Extra detail behind an info button, and that button's accessible name.
+  info?: string;
+  infoLabel?: string;
+};
+
 export interface DeveloperPricingPlan extends PricingPlan {
   family: 'developer';
-  dynamicIngestion: boolean;
-  studioAccess: boolean;
-  priorityReview: boolean;
+  // Local price for developers in Egypt, per month. Planned: per-region currencies
+  // with exchange rates set from the admin dashboard, replacing this fixed field.
+  monthlyPriceEGP: number;
+  features: PlanFeature[];
+  // Shown only with annual billing.
+  annualFeatures?: PlanFeature[];
+  // "Everything in <plan>, plus:" when this plan builds on another.
+  includesPlan?: string;
   support: DeveloperSupport;
 }
 
 const developerPlans: DeveloperPricingPlan[] = [
   {
-    id: 'developer',
-    name: 'Developer',
-    monthlyPrice: 5,
+    id: 'developer-free',
+    name: 'Free',
+    monthlyPrice: 0,
+    monthlyPriceEGP: 0,
     agents: 0,
     family: 'developer',
-    dynamicIngestion: false,
-    studioAccess: false,
-    priorityReview: false,
     support: 'limited',
+    features: [
+      {
+        text: 'Create and publish agents to the marketplace',
+        info: 'Every agent is reviewed by our internal developers before it is published, usually within 10 business days.',
+        infoLabel: 'How publishing works',
+      },
+      { text: 'Limited developer Studio access' },
+      { text: 'Build with the native Genfleet SDK' },
+      { text: 'Developer community on Discord' },
+    ],
   },
   {
     id: 'developer-pro',
-    name: 'Developer Pro',
-    monthlyPrice: 15,
+    name: 'Pro',
+    monthlyPrice: 10,
+    monthlyPriceEGP: 550,
     agents: 0,
     family: 'developer',
-    dynamicIngestion: true,
-    studioAccess: true,
-    priorityReview: true,
     support: 'priority',
+    includesPlan: 'Free',
+    features: [
+      { text: 'Priority review for your agents' },
+      { text: 'Invitations to developer meetups' },
+      { text: 'Membership in the developer program' },
+    ],
+    annualFeatures: [{ text: 'Genfleet swag, shipped within Egypt' }],
   },
 ];
 
 const standardPlans: StandardPricingPlan[] = [
-  {
-    id: 'free-trial',
-    name: 'Free',
-    monthlyPrice: 0,
-    agents: 1,
-    connectors: '3',
-    startingCredits: 0,
-    family: 'standard',
-    support: 'none',
-  },
   {
     id: 'starter',
     name: 'Starter',
@@ -97,7 +112,11 @@ const standardPlans: StandardPricingPlan[] = [
   },
 ];
 
-export const pricingPlans: Record<PricingFamily, PricingPlan[]> = {
+export const pricingPlans: {
+  developer: DeveloperPricingPlan[];
+  standard: StandardPricingPlan[];
+  enterprise: PricingPlan[];
+} = {
   developer: developerPlans,
   standard: standardPlans,
   enterprise: [], // Enterprise plans are not defined in this snippet, but can be added here as needed.

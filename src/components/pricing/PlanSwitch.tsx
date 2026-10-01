@@ -26,7 +26,7 @@ export function PlanSwitch({ selectedFamily, onFamilyChange }: PlanSwitchProps) 
             type='button'
             onClick={() => onFamilyChange(value)}
             aria-pressed={isActive}
-            className={`min-w-0 rounded-full px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-4 ${isActive ? activeButtonClass : inactiveButtonClass}`}
+            className={`min-w-0 rounded-full px-3 py-2 text-xs font-medium transition-colors sm:px-4 ${isActive ? activeButtonClass : inactiveButtonClass}`}
           >
             {label}
           </button>

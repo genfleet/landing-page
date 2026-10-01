@@ -1,6 +1,5 @@
 import type { BillingInterval } from '@/data/pricing';
 import { Switch } from '../../shadcn/components/ui/switch';
-import { Badge } from '../../shadcn/components/ui/badge';
 import { cn } from '../../shadcn/lib/utils';
 
 type PricingSwitchProps = {

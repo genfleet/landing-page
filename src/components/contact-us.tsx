@@ -1,9 +1,9 @@
-import { ArrowRightIcon } from '@phosphor-icons/react/dist/csr/ArrowRight';
+import { NudgeArrow } from '@/components/nudge-arrow';
 import { Button } from '@/shadcn/components/ui/button';
 import { Input } from '@/shadcn/components/ui/input';
 import { Label } from '@/shadcn/components/ui/label';
 import { Textarea } from '@/shadcn/components/ui/textarea';
-import { type BillingInterval, pricingPlans } from '../data/pricing';
+import { type BillingInterval } from '../data/pricing';
 
 const selectClassName =
   'h-12 w-full appearance-none rounded-xl border border-input bg-background px-4 text-sm text-foreground outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50';
@@ -14,37 +14,38 @@ export function ContactUs({ defaultPlan, defaultBilling }: { defaultPlan: string
   return (
     <div className="rounded-[1.75rem] bg-card p-5 sm:p-8">
       <div className="mb-7">
-        <h3 className="text-2xl font-semibold tracking-tight">Request beta access</h3>
+        <h2 className="text-2xl font-semibold tracking-tight">Request a demo</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          Tell us where your business needs support and we will follow up about early access.
+          Tell us where your business needs support and we will set up a walkthrough with your team.
         </p>
       </div>
 
       <form action="https://api.web3forms.com/submit" method="POST" className="space-y-5">
         <input type="hidden" name="access_key" value={accessKey} />
-        <input type="hidden" name="subject" value="Genfleet private beta request" />
+        <input type="hidden" name="subject" value="Genfleet demo request" />
         <input type="hidden" name="from_name" value="Genfleet landing page" />
 
-        <BetaRequestFields defaultPlan={defaultPlan} defaultBilling={defaultBilling} />
+        {defaultPlan && <input type="hidden" name="plan" value={defaultPlan} />}
+        <BetaRequestFields defaultBilling={defaultBilling} />
 
         <Button
           type="submit"
           disabled={!accessKey}
           className="h-12 w-full rounded-full text-base"
         >
-          Request access
-          <ArrowRightIcon aria-hidden="true" />
+          Request a demo
+          <NudgeArrow />
         </Button>
 
         <p className="text-center text-xs leading-relaxed text-muted-foreground">
-          We will use these details only to follow up about your request.
+          We will only use these details to arrange your demo.
         </p>
       </form>
     </div>
   );
 }
 
-function BetaRequestFields({ defaultPlan, defaultBilling }: { defaultPlan: string; defaultBilling: BillingInterval }) {
+function BetaRequestFields({ defaultBilling }: { defaultBilling: BillingInterval }) {
   return (
     <>
       <div className='space-y-2'>
@@ -72,7 +73,7 @@ function BetaRequestFields({ defaultPlan, defaultBilling }: { defaultPlan: strin
 
       <div className='space-y-2'>
         <Label htmlFor='useCase'>
-          What would you like your agent team to handle?
+          What would you like your AI team to handle?
         </Label>
         <Textarea
           id='useCase'
