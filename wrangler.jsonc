@@ -4,6 +4,9 @@
   // paths with index.html so client-side routes (/platform, /agents, ...) load.
   "name": "landing-page",
   "compatibility_date": "2026-09-01",
+  "observability": {
+    "enabled": true
+  },
   "assets": {
     "directory": "./dist",
     "not_found_handling": "single-page-application"
