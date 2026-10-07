@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# /brag video renders
+brag-output*/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
