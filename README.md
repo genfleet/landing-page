@@ -1,3 +1,14 @@
+# Genfleet landing page
+
+## Forms
+
+Every form on the site is collected by [Web3Forms](https://web3forms.com). Build a new form with `Web3Form` (`src/components/forms/Web3Form.tsx`) and it is collected too: the component adds the access key, subject, sender name and a spam honeypot, and sends the form in the background with in-page success and error messages.
+
+The key comes from `VITE_PUBLIC_WEB3FORMS_ACCESS_KEY`:
+
+- **Local dev:** put it in `.env` (never commit it). Without it, each form shows a notice and can't be sent.
+- **Production (Cloudflare):** set it as a build variable. `npm run build` fails without it, so the site can't ship with dead forms.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

@@ -1,5 +1,4 @@
-import { NudgeArrow } from '@/components/nudge-arrow';
-import { Button } from '@/shadcn/components/ui/button';
+import { Web3Form } from '@/components/forms/Web3Form';
 import { Input } from '@/shadcn/components/ui/input';
 import { Label } from '@/shadcn/components/ui/label';
 import { Textarea } from '@/shadcn/components/ui/textarea';
@@ -9,8 +8,6 @@ const selectClassName =
   'h-12 w-full appearance-none rounded-xl border border-input bg-background px-4 text-sm text-foreground outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50';
 
 export function ContactUs({ defaultPlan, defaultBilling }: { defaultPlan: string; defaultBilling: BillingInterval }) {
-  const accessKey = import.meta.env.VITE_PUBLIC_WEB3FORMS_ACCESS_KEY;
-
   return (
     <div className="rounded-[1.75rem] bg-card p-5 sm:p-8">
       <div className="mb-7">
@@ -20,27 +17,16 @@ export function ContactUs({ defaultPlan, defaultBilling }: { defaultPlan: string
         </p>
       </div>
 
-      <form action="https://api.web3forms.com/submit" method="POST" className="space-y-5">
-        <input type="hidden" name="access_key" value={accessKey} />
-        <input type="hidden" name="subject" value="Genfleet demo request" />
-        <input type="hidden" name="from_name" value="Genfleet landing page" />
-
+      <Web3Form
+        subject="Genfleet demo request"
+        submitLabel="Request a demo"
+        successMessage="We will email you shortly to set up your walkthrough."
+        footnote="We will only use these details to arrange your demo."
+        className="space-y-5"
+      >
         {defaultPlan && <input type="hidden" name="plan" value={defaultPlan} />}
         <BetaRequestFields defaultBilling={defaultBilling} />
-
-        <Button
-          type="submit"
-          disabled={!accessKey}
-          className="h-12 w-full rounded-full text-base"
-        >
-          Request a demo
-          <NudgeArrow />
-        </Button>
-
-        <p className="text-center text-xs leading-relaxed text-muted-foreground">
-          We will only use these details to arrange your demo.
-        </p>
-      </form>
+      </Web3Form>
     </div>
   );
 }
