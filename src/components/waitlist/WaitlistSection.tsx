@@ -1,7 +1,6 @@
 import { CheckIcon } from '@phosphor-icons/react/dist/csr/Check';
-import { NudgeArrow } from '@/components/nudge-arrow';
+import { Web3Form } from '@/components/forms/Web3Form';
 import { pricingPlans, type BillingInterval } from '@/data/pricing';
-import { Button } from '@/shadcn/components/ui/button';
 import { Input } from '@/shadcn/components/ui/input';
 import { Label } from '@/shadcn/components/ui/label';
 import { Textarea } from '@/shadcn/components/ui/textarea';
@@ -21,7 +20,6 @@ type WaitlistSectionProps = {
 };
 
 export function WaitlistSection({ selectedPlan, selectedBilling }: WaitlistSectionProps) {
-  const accessKey = import.meta.env.VITE_PUBLIC_WEB3FORMS_ACCESS_KEY;
   const plans = pricingPlans.developer;
   const defaultPlan = plans.some((plan) => plan.id === selectedPlan) ? selectedPlan : plans[0].id;
 
@@ -49,10 +47,14 @@ export function WaitlistSection({ selectedPlan, selectedBilling }: WaitlistSecti
           <h2 className='text-2xl font-semibold tracking-tight'>Join the developer waitlist</h2>
           <p className='mt-2 text-sm leading-relaxed text-muted-foreground'>Tell us a little about what you want to build.</p>
 
-          <form action='https://api.web3forms.com/submit' method='POST' className='mt-7 space-y-5'>
-            <input type='hidden' name='access_key' value={accessKey} />
-            <input type='hidden' name='subject' value='Genfleet developer waitlist' />
-            <input type='hidden' name='from_name' value='Genfleet landing page' />
+          <Web3Form
+            subject='Genfleet developer waitlist'
+            submitLabel='Join waitlist'
+            successMessage='You are on the list. We will email you when your spot is ready.'
+            footnote='We will only use these details to review your request and tell you about your spot.'
+            className='mt-7 space-y-5'
+            submitClassName='hover:bg-signal hover:text-white'
+          >
             <input type='hidden' name='billing' value={selectedBilling} />
 
             <div className='space-y-2'>
@@ -101,14 +103,7 @@ export function WaitlistSection({ selectedPlan, selectedBilling }: WaitlistSecti
                 className='min-h-28 resize-none rounded-xl bg-background px-4 py-3'
               />
             </div>
-
-            <Button type='submit' disabled={!accessKey} className='h-12 w-full rounded-full text-base hover:bg-signal hover:text-white'>
-              Join waitlist
-              <NudgeArrow />
-            </Button>
-
-            <p className='text-center text-xs leading-relaxed text-muted-foreground'>We will only use these details to review your request and tell you about your spot.</p>
-          </form>
+          </Web3Form>
         </div>
       </div>
     </section>
