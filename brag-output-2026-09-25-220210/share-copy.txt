@@ -1,0 +1,2 @@
+GenFleet is in private beta.
+Your AI team, built around your business: specialist agents from the marketplace, plugged into Slack, Jira and your ERP — and a person on your team still makes the final call.

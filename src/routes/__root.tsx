@@ -1,12 +1,20 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router';
-import { ThemeProvider } from '@/components/theme-provider';
+import { createRootRoute, HeadContent, Outlet } from '@tanstack/react-router';
+import { DevSourceInspector } from '@/components/dev-source-inspector';
+import { Footer } from '@/components/footer/Footer';
+import { Navbar } from '@/components/navbar/Navbar';
 
 export const Route = createRootRoute({
   component: () => (
-    <ThemeProvider defaultTheme="system" storageKey="agentinc-theme">
-      <div className="min-h-screen bg-background text-foreground">
-        <Outlet />
+    <>
+      <HeadContent />
+      <div className='min-h-screen overflow-x-clip bg-background text-foreground'>
+        <Navbar />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
       </div>
-    </ThemeProvider>
+      {import.meta.env.DEV && <DevSourceInspector />}
+    </>
   ),
 });

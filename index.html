@@ -2,26 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo_white.svg" id="favicon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agentinc</title>
+    <meta name="theme-color" content="#f4f2ee" />
+    <meta name="description" content="Find specialized AI agents, connect your business tools, and assemble a team customized with help from Genfleet." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Genfleet | Your AI team, built around your business." />
+    <meta property="og:description" content="Find specialized AI agents, connect your business tools, and assemble a team customized with help from Genfleet." />
+    <meta property="og:url" content="https://genfleet.ai/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Genfleet | Your AI team, built around your business." />
+    <meta name="twitter:description" content="Find specialized AI agents, connect your business tools, and assemble a team customized with help from Genfleet." />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" />
+    <link rel="canonical" href="https://genfleet.ai/" />
+    <title>Genfleet | Your AI team, built around your business.</title>
     <script>
-      // Set favicon based on browser's color scheme preference
-      (function() {
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const favicon = document.getElementById('favicon');
-        if (favicon) {
-          favicon.href = isDark ? '/logo_white.svg' : '/logo_black.svg';
-        }
-
-        // Listen for changes in browser theme
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-          const favicon = document.getElementById('favicon');
-          if (favicon) {
-            favicon.href = e.matches ? '/logo_white.svg' : '/logo_black.svg';
-          }
-        });
-      })();
+      ;(function () {
+        try {
+          var stored = localStorage.getItem('theme-preference')
+          var dark =
+            stored === 'dark' ||
+            ((stored === null || stored === 'system') &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches)
+          var root = document.documentElement
+          root.classList.toggle('dark', dark)
+          root.classList.toggle('light', !dark)
+          root.style.colorScheme = dark ? 'dark' : 'light'
+          document.querySelector('meta[name="theme-color"]').content = dark ? '#141413' : '#f4f2ee'
+        } catch (e) {}
+      })()
     </script>
   </head>
   <body>

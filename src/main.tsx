@@ -2,11 +2,12 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createRouter, RouterProvider } from '@tanstack/react-router'
+import { ThemeProvider } from './components/theme-provider';
 import { routeTree } from './routeTree.gen';
 
 
 // Create the router instance
-const router = createRouter({ routeTree })
+const router = createRouter({ routeTree, scrollRestoration: true, defaultViewTransition: true })
 
 // Register the router for type safety
 declare module '@tanstack/react-router' {
@@ -17,6 +18,8 @@ declare module '@tanstack/react-router' {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </StrictMode>
 );
