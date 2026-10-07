@@ -8,7 +8,7 @@ import { cn } from '@/shadcn/lib/utils';
 // by Web3Forms (and lands in the same inbox) just by using this component.
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
-type Status = { state: 'idle' | 'sending' } | { state: 'sent' } | { state: 'failed'; message: string };
+type Status = { state: 'idle' | 'sending' | 'sent' } | { state: 'failed'; message: string };
 
 type Web3FormProps = {
   subject: string;
@@ -45,7 +45,9 @@ export function Web3Form({ subject, submitLabel, successMessage, className, subm
 
   if (status.state === 'sent') {
     return (
-      <div role='status' className={cn('rounded-xl border border-input bg-background p-6 text-center', className)}>
+      // The form (and its focused button) is replaced, so move focus here; screen
+      // readers then read the message, which a freshly inserted live region may not get.
+      <div ref={(el) => el?.focus()} tabIndex={-1} role='status' className={cn('rounded-xl border border-input bg-background p-6 text-center outline-none', className)}>
         <p className='font-semibold'>Thank you, we have it.</p>
         <p className='mt-2 text-sm leading-relaxed text-muted-foreground'>{successMessage}</p>
       </div>
@@ -70,7 +72,7 @@ export function Web3Form({ subject, submitLabel, successMessage, className, subm
 
       {status.state === 'failed' && (
         <p role='alert' className='text-center text-sm text-destructive'>
-          Your details were not sent: {status.message} Please try again.
+          Your details were not sent: {status.message.replace(/([^.!?])$/, '$1.')} Please try again.
         </p>
       )}
 
