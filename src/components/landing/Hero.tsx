@@ -9,6 +9,7 @@ import { LinkIcon } from '@phosphor-icons/react/dist/csr/Link';
 import { MagnifyingGlassIcon } from '@phosphor-icons/react/dist/csr/MagnifyingGlass';
 import { UsersThreeIcon } from '@phosphor-icons/react/dist/csr/UsersThree';
 import { Button } from '@/shadcn/components/ui/button';
+import { showPreviewPages } from '@/config/features';
 
 export function Hero() {
   return (
@@ -43,14 +44,16 @@ export function Hero() {
                 <NudgeArrow />
               </Link>
             </Button>
-            <Button
-              asChild
-              size='lg'
-              variant='outline'
-              className='h-12 rounded-full border-foreground/20 bg-transparent px-7 text-base'
-            >
-              <Link to='/agents'>Explore agents</Link>
-            </Button>
+            {showPreviewPages && (
+              <Button
+                asChild
+                size='lg'
+                variant='outline'
+                className='h-12 rounded-full border-foreground/20 bg-transparent px-7 text-base'
+              >
+                <Link to='/agents'>Explore agents</Link>
+              </Button>
+            )}
           </div>
         </div>
 

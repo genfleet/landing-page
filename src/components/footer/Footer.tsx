@@ -1,10 +1,10 @@
 import { Link } from '@tanstack/react-router';
+import { showPreviewPages } from '@/config/features';
 import { Wordmark } from '@/components/logo';
 
 const footerLinks = [
   { label: 'Platform', to: '/platform' },
-  { label: 'Agents', to: '/agents' },
-  { label: 'Pricing', to: '/pricing' },
+  ...(showPreviewPages ? ([{ label: 'Agents', to: '/agents' }, { label: 'Pricing', to: '/pricing' }] as const) : []),
   { label: 'Request a demo', to: '/demo' },
 ] as const;
 

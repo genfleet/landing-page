@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { NudgeArrow } from '@/components/nudge-arrow';
 import { CatalogPreview } from '@/components/marketplace/CatalogPreview';
+import { showPreviewPages } from '@/config/features';
 
 export function MarketplaceSection() {
   return (
@@ -9,10 +10,12 @@ export function MarketplaceSection() {
         <div>
           <h2 className='text-4xl font-bold leading-[1.02] tracking-[-0.03em] sm:text-[3.4rem]'>Find what your business needs next.</h2>
           <p className='mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground'>Browse agents, tools, and connectors for different roles and business functions, and add what you need as your work changes.</p>
-          <Link to='/agents' className='group mt-8 inline-flex items-center gap-2 rounded-full py-2 font-medium transition-colors duration-200 hover:text-signal'>
-            Browse all agents
-            <NudgeArrow className='size-4' />
-          </Link>
+          {showPreviewPages && (
+            <Link to='/agents' className='group mt-8 inline-flex items-center gap-2 rounded-full py-2 font-medium transition-colors duration-200 hover:text-signal'>
+              Browse all agents
+              <NudgeArrow className='size-4' />
+            </Link>
+          )}
         </div>
         <CatalogPreview limit={4} />
       </div>

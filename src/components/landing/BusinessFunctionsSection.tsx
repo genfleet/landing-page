@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { NudgeArrow } from '@/components/nudge-arrow';
+import { showPreviewPages } from '@/config/features';
 import { PlusIcon } from '@phosphor-icons/react/dist/csr/Plus';
 import { ChartLineUpIcon } from '@phosphor-icons/react/dist/csr/ChartLineUp';
 import { CodeIcon } from '@phosphor-icons/react/dist/csr/Code';
@@ -32,13 +33,9 @@ export function BusinessFunctionsSection() {
           </div>
           <div>
             <ul className='grid border-t border-border sm:grid-cols-2'>
-              {businessFunctions.map(({ label, slug, description, icon: Icon }, index) => (
-                <li key={label} className={`border-b border-border ${index % 2 === 0 ? 'sm:border-r' : ''}`}>
-                  <Link
-                    to='/agents'
-                    search={{ fn: slug }}
-                    className='group grid h-full grid-cols-[auto_1fr] gap-4 py-6 sm:p-6'
-                  >
+              {businessFunctions.map(({ label, slug, description, icon: Icon }, index) => {
+                const content = (
+                  <>
                     <Icon
                       aria-hidden='true'
                       className='mt-0.5 size-5 text-foreground transition-colors duration-300 group-hover:animate-[icon-nudge_400ms_var(--ease-glide)_forwards] group-hover:text-signal group-focus-visible:text-signal'
@@ -47,19 +44,34 @@ export function BusinessFunctionsSection() {
                       <span className='block font-semibold transition-colors duration-300 group-hover:text-signal group-focus-visible:text-signal'>{label}</span>
                       <span className='mt-2 block text-sm leading-relaxed text-muted-foreground'>{description}</span>
                     </span>
-                  </Link>
-                </li>
-              ))}
+                  </>
+                );
+                const layout = 'grid h-full grid-cols-[auto_1fr] gap-4 py-6 sm:p-6';
+                return (
+                  <li key={label} className={`border-b border-border ${index % 2 === 0 ? 'sm:border-r' : ''}`}>
+                    {showPreviewPages ? (
+                      <Link to='/agents' search={{ fn: slug }} className={`group ${layout}`}>
+                        {content}
+                      </Link>
+                    ) : (
+                      // Without the agents page there is nowhere to go, so the card is not a link (and has no hover state).
+                      <div className={layout}>{content}</div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
             <div className='flex flex-col gap-3 border-b border-border py-6 sm:flex-row sm:items-center sm:justify-between sm:px-6'>
               <p className='flex items-center gap-3 text-sm text-muted-foreground'>
                 <PlusIcon aria-hidden='true' className='size-5 text-foreground' />
                 And more
               </p>
-              <Link to='/agents' className='group inline-flex items-center gap-2 self-start rounded-full py-1 text-sm font-medium transition-colors duration-200 hover:text-signal sm:self-auto'>
-                Browse all agents
-                <NudgeArrow className='size-4' />
-              </Link>
+              {showPreviewPages && (
+                <Link to='/agents' className='group inline-flex items-center gap-2 self-start rounded-full py-1 text-sm font-medium transition-colors duration-200 hover:text-signal sm:self-auto'>
+                  Browse all agents
+                  <NudgeArrow className='size-4' />
+                </Link>
+              )}
             </div>
           </div>
         </div>
