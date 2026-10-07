@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
+import { showPreviewPages } from '@/config/features';
 import { NudgeArrow } from '@/components/nudge-arrow';
 import { ListIcon } from '@phosphor-icons/react/dist/csr/List';
 import { XIcon } from '@phosphor-icons/react/dist/csr/X';
@@ -10,8 +11,7 @@ import { ThemeToggle } from '@/components/theme-toggle';
 const navigationItems = [
   { label: 'Home', to: '/' },
   { label: 'Platform', to: '/platform' },
-  { label: 'Agents', to: '/agents' },
-  { label: 'Pricing', to: '/pricing' },
+  ...(showPreviewPages ? ([{ label: 'Agents', to: '/agents' }, { label: 'Pricing', to: '/pricing' }] as const) : []),
 ] as const;
 
 export function Navbar() {

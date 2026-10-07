@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { NudgeArrow } from '@/components/nudge-arrow';
+import { showPreviewPages } from '@/config/features';
 import { pricingPlans } from '@/data/pricing';
 import { Button } from '@/shadcn/components/ui/button';
 
@@ -30,13 +31,17 @@ export function CtaBand({
                 <NudgeArrow />
               </Link>
             </Button>
-            <Button asChild size='lg' variant='outline' className='h-12 rounded-full border-foreground/20 bg-transparent px-7 text-base hover:border-signal hover:bg-signal hover:text-white'>
-              <Link to='/pricing'>See pricing</Link>
-            </Button>
+            {showPreviewPages && (
+              <Button asChild size='lg' variant='outline' className='h-12 rounded-full border-foreground/20 bg-transparent px-7 text-base hover:border-signal hover:bg-signal hover:text-white'>
+                <Link to='/pricing'>See pricing</Link>
+              </Button>
+            )}
           </div>
-          <p className='text-sm text-muted-foreground'>
-            Plans from ${startingPrice} a month. Enterprise plans are quoted for your organization.
-          </p>
+          {showPreviewPages && (
+            <p className='text-sm text-muted-foreground'>
+              Plans from ${startingPrice} a month. Enterprise plans are quoted for your organization.
+            </p>
+          )}
         </div>
       </div>
     </section>

@@ -1,9 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
+import { showPreviewPages } from '@/config/features';
 import { PageHeader } from '@/components/page-header';
 import { FaqSection } from '@/components/pricing/FaqSection';
 import { PricingSection } from '@/components/pricing/PricingSection';
 
 export const Route = createFileRoute('/pricing')({
+  beforeLoad: () => {
+    if (!showPreviewPages) throw redirect({ to: '/', replace: true });
+  },
   head: () => ({ meta: [{ title: 'Pricing | Genfleet' }] }),
   component: PricingPage,
 });

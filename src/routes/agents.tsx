@@ -1,4 +1,5 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
+import { showPreviewPages } from '@/config/features';
 import { AgentDirectory } from '@/components/agents/AgentDirectory';
 import { type AgentSort, parseList, sortOptions } from '@/components/agents/search';
 
@@ -11,6 +12,9 @@ export type AgentsSearch = {
 };
 
 export const Route = createFileRoute('/agents')({
+  beforeLoad: () => {
+    if (!showPreviewPages) throw redirect({ to: '/', replace: true });
+  },
   // Filters live in the URL so a filtered view can be shared or linked to.
   validateSearch: (search: Record<string, unknown>): AgentsSearch => {
     const text = (value: unknown) => (typeof value === 'string' && value.trim() ? value : undefined);
